@@ -1,0 +1,67 @@
+<div class = 'container'>
+
+  <h1>Funcionários</h1>
+
+    <div class="toolbar">
+
+      <button
+          class="new-btn"
+          routerLink="/employees/new">
+
+          + Novo Funcionário
+
+      </button>
+
+    </div>
+
+    <table>
+
+      <thead>
+      
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Cargo</th>
+          <th>Salário</th>
+          <th>Ações</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (employee of employees; track employee.id) {
+
+          <tr>
+
+            <td>{{ employee.name }}</td>
+
+            <td>{{ employee.email }}</td>
+
+            <td>{{ employee.role }}</td>
+
+            <td>
+              R$ {{ employee.salary }}
+            </td>
+            <td class="actions">
+
+              <button
+                class="edit-btn"
+                [routerLink]="['/employees/edit', employee.id]">
+                Editar
+              </button>
+
+              <button
+                class="delete-btn"
+                (click)="deleteEmployee(employee.id)">
+                Excluir
+              </button>
+
+             </td>
+            
+
+          </tr>
+
+        }
+    </table>
+</div>  

@@ -1,0 +1,9 @@
+export interface Employee {
+    id: number
+    name: string
+    email: string
+    role: string
+    salary: number
+}
+
+export type CreateEmployee = Omit<Employee,'id'>

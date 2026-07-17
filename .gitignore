@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+
+# Angular
+.angular/
+dist/
+
+# Build
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+
+# IDE
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db

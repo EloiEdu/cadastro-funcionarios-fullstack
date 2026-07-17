@@ -1,0 +1,25 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    background: var(--background);
+}
+
+.dashboard {
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.page-description {
+    color: var(--text-secondary);
+}

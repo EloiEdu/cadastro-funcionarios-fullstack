@@ -1,0 +1,58 @@
+<main>
+
+  <h1>
+    Novo Funcionário
+  </h1>
+
+
+  <form 
+    [formGroup]="employeeForm"
+    (ngSubmit)="submit()">
+
+
+    <label>
+      Nome
+    </label>
+
+    <input 
+      type="text"
+      formControlName="name">
+
+
+    <label>
+      Email
+    </label>
+
+    <input 
+      type="email"
+      formControlName="email">
+
+
+    <label>
+      Cargo
+    </label>
+
+    <input 
+      type="text"
+      formControlName="role">
+
+
+    <label>
+      Salário
+    </label>
+
+    <input 
+      type="number"
+      formControlName="salary">
+
+
+    <button type="submit">
+       {{ editingEmployeeId !== null
+        ? 'Atualizar Funcionário'
+        : 'Cadastrar Funcionário' }}
+    </button>
+
+
+  </form>
+
+</main>

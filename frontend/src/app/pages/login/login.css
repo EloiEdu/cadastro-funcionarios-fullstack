@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  height: 100vh;
+  background: #f6f6f6;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* centralização da tela */
+main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card do login */
+section {
+  width: 100%;
+  max-width: 380px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* título */
+h1 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* agrupamento dos campos */
+form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+/* label */
+label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+/* inputs */
+input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* foco moderno */
+input:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+/* botão */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* hover estilo SaaS */
+button:hover {
+  background: #222;
+  transform: translateY(-1px);
+}

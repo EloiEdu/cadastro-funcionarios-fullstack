@@ -1,0 +1,18 @@
+:root {
+  --background: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e5e5;
+  --text: #111111;
+  --text-secondary: #666666;
+
+  --primary: #000000;
+  --primary-hover: #222222;
+
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+
+  --success: #16a34a;
+
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0,0,0,.06);
+}
