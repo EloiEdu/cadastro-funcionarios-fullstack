@@ -1,8 +1,10 @@
 import { EmployeeService } from '../../core/services/employee.service';
 import { Employee } from '../../shared/interfaces/employee.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core'
+import { NgZone } from '@angular/core';
+
 @Component({
   selector: 'app-employees',
   standalone: true,
@@ -12,18 +14,23 @@ import { ChangeDetectorRef } from '@angular/core'
 })
 export class EmployeesComponent implements OnInit{
   
-  employees: Employee[] =[]
+  instanceId = Math.random().toString(36).slice(2, 8)
+  employees = signal<Employee[]>([])
   
-  constructor(private employeeService: EmployeeService, private cdr: ChangeDetectorRef){}
+  constructor(
+    private employeeService: EmployeeService, 
+    private cdr: ChangeDetectorRef,
+    private zone: NgZone
+    ){}
   
   loadEmployees(): void {
-    console.log('loadEmployees chamado')
+    console.log('loadEmployees:', this.instanceId)
 
     this.employeeService.getEmployees().subscribe({
       next:(employees)=>{
-        this.employees = employees
-        this.cdr.detectChanges()
-        console.log(this.employees)
+        console.log('zona ativa:', NgZone.isInAngularZone())
+        this.employees.set(employees)
+        //this.cdr.detectChanges()
         //console.log('mesmo array?', this.employees)
         //console.log('length:',this.employees.length)
 
@@ -38,7 +45,7 @@ export class EmployeesComponent implements OnInit{
 }
  
   ngOnInit(): void{
-    console.log('EmployeesComponent iniciado')
+    console.log('EmployeesComponent',this.instanceId, 'iniciado')
     this.loadEmployees()
   }
 

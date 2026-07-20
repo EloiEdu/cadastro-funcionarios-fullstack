@@ -1,8 +1,7 @@
 <div class = 'container'>
 
   <h1>Funcionários</h1>
-  <p>Total de funcionários: {{ employees.length }}</p>
-
+  <p>Total de funcionários: {{ employees().length }}</p>
     <div class="toolbar">
 
       <button
@@ -30,8 +29,9 @@
       </thead>
 
       <tbody>
+        
 
-        @for (employee of employees; track employee.id) {
+        @for (employee of employees(); track employee.id) {
 
           <tr>
 
