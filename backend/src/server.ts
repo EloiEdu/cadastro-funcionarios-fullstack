@@ -1,9 +1,14 @@
 import Fastify from 'fastify'
 import { employeeRoutes } from './routes/employee.routes.js'
+import cors from '@fastify/cors'
 
 const app = Fastify()
 
-app.register(employeeRoutes)
+await app.register(cors,{
+    origin: 'http://localhost:4200'
+})
+
+await app.register(employeeRoutes)
 
 app.listen({
     port:3333

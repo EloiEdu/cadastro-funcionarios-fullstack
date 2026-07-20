@@ -1,6 +1,7 @@
 <div class = 'container'>
 
   <h1>Funcionários</h1>
+  <p>Total de funcionários: {{ employees.length }}</p>
 
     <div class="toolbar">
 
@@ -34,16 +35,13 @@
 
           <tr>
 
-            <td>{{ employee.name }}</td>
-
-            <td>{{ employee.email }}</td>
-
-            <td>{{ employee.role }}</td>
-
-            <td>
-              R$ {{ employee.salary }}
-            </td>
-            <td class="actions">
+            <tr>
+            <td colspan="5">{{ employee.name }}</td>
+            <td colspan="5">{{ employee.email }}</td>
+            <td colspan="5">{{ employee.role }}</td>
+            <td colspan="5">R$ {{ employee.salary }}</td>
+            
+              <td class="actions">
 
               <button
                 class="edit-btn"
@@ -56,12 +54,11 @@
                 (click)="deleteEmployee(employee.id)">
                 Excluir
               </button>
-
-             </td>
             
 
           </tr>
 
         }
+      </tbody>
     </table>
 </div>  

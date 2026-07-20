@@ -2,6 +2,7 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { Employee } from '../../shared/interfaces/employee.interface';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-employees',
   standalone: true,
@@ -16,10 +17,17 @@ export class EmployeesComponent implements OnInit{
   constructor(private employeeService: EmployeeService){}
   
   loadEmployees(): void {
+    console.log('loadEmployees chamado')
+
     this.employeeService.getEmployees().subscribe({
       next:(employees)=>{
-        console.log(employees)
         this.employees = employees
+        console.log('mesmo array?', this.employees)
+        console.log('length:',this.employees.length)
+
+        setTimeout(()=>{
+          console.log('depois de 2 segundos:', this.employees.length)
+        },2000)
       }, 
       error:(err)=>{
         console.error('erro ao carregar funcionários',err)
@@ -28,6 +36,7 @@ export class EmployeesComponent implements OnInit{
 }
  
   ngOnInit(): void{
+    console.log('EmployeesComponent iniciado')
     this.loadEmployees()
   }
 
