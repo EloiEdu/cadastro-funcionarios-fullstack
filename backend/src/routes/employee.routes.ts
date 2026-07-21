@@ -1,8 +1,11 @@
 import { EmployeeController } from '../controllers.ts/employee.controller.js';
 import {FastifyInstance} from 'fastify'
 import { CreateEmployee } from '../interfaces/employee.interface.js';
+import { authMiddleware } from '../middleware/auth.middleware.js';
 
 export async function employeeRoutes(app: FastifyInstance){
+
+    app.addHook('preHandler',authMiddleware)
     
     const employeeController = new EmployeeController()
 

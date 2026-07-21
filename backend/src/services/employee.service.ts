@@ -1,9 +1,8 @@
-import { create } from 'node:domain';
 import { EmployeeRepository } from "../repositories/employee.repository.js"
 import { CreateEmployee } from '../interfaces/employee.interface.js';
 
 export class EmployeeService {
-    private employeeRepository = new EmployeeRepository()
+    private readonly employeeRepository = new EmployeeRepository()
     
     async getAll() {
         return this.employeeRepository.findAll()

@@ -1,4 +1,3 @@
-import { create } from "node:domain"
 import { pool } from "../database/connection.js"
 import { CreateEmployee } from "../interfaces/employee.interface.js"
 
