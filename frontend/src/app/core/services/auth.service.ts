@@ -1,31 +1,47 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Token } from "@angular/compiler";
+
+export interface LoginRequest{
+  email: string
+  password: string
+}
+
+export interface LoginResponse{
+  token:string
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn:'root'
 })
 
-export class AuthService {
+export class AuthService{
 
-    login(email: string, password: string): Promise<boolean> {
+  private readonly apiUrl = 'http://localhost:3333/login'
 
-    return new Promise((resolve) => {
+  constructor(
+    private http: HttpClient)
+    {}
 
-      // Simula uma chamada ao backend
-      setTimeout(() => {
-
-        if (
-          email === 'admin@empresa.com' &&
-          password === '123456'
-        ) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-
-      }, 2000);
-
-    });
-
+  login(data: LoginRequest): Observable<LoginResponse>{
+    
+    return this.http.post<LoginResponse>(this.apiUrl,data) 
   }
 
+  saveToken(token: string): void{
+    localStorage.setItem('token',token)
+  }
+
+  getToken(): string | null{
+    return localStorage.getItem('token')
+  }
+
+  isAuthenticated(): boolean{
+    return !!this.getToken()
+  }
+
+  logout(): void{
+    localStorage.removeItem('token')
+  }
 }

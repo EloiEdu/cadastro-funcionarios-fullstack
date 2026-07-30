@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login';
 import { EmployeesComponent } from './pages/employees/employees';
 import { EmployeeFormComponent } from './pages/employees/employee-form/employee-form';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -17,19 +18,26 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'employees',
-        component:EmployeesComponent
+        component:EmployeesComponent,
+        canActivate: [authGuard]
+
     },
     {
         path: 'employees/new',
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
+        canActivate: [authGuard]
+
     },
     {
         path: 'employees/edit/:id',
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
+        canActivate: [authGuard]
+
     },
     {
     path: '**',

@@ -24,3 +24,27 @@ header {
     color: var(--text-secondary);
 
 }
+
+.leave {
+
+    background: black;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.leave:hover {
+
+    background: #222;
+
+}

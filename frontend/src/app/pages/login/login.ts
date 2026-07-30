@@ -27,7 +27,7 @@ export class LoginComponent {
     }
 
        // Envia o formulário
-      async submit(){
+      submit(){
 
         // Impede envio com dados inválidos
         if(this.loginForm.invalid){
@@ -36,16 +36,25 @@ export class LoginComponent {
         }
         this.isloading = true
         const { email, password} = this.loginForm.value
-        const sucess = await this.authService.login(email,password)
-        //console.log('login: ',this.loginForm.value)
-        this.isloading = false
+        
+        this.authService.login({
+          email,
+          password
+        }).subscribe({
+          next:(response) =>{
+            this.authService.saveToken(response.token)
+            console.log('token salvo: ',response.token)
+            this.isloading = false
+            this.router.navigate(['/dashboard'])
+          },
+          error: (err)=>{
+            this.isloading = false
+            console.error(err)
+            alert('email ou senha invalidos')
+          }
+        })
 
-        if(sucess){
-          console.log('login realizado')
-          this.router.navigate(['/dashboard'])
-        } else{
-          console.log('email ou senha invalidos')
-        }
+        
     
       }
     
