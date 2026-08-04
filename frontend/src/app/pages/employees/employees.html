@@ -35,11 +35,11 @@
 
           <tr>
 
-            <tr>
-            <td colspan="5">{{ employee.name }}</td>
-            <td colspan="5">{{ employee.email }}</td>
-            <td colspan="5">{{ employee.role }}</td>
-            <td colspan="5">R$ {{ employee.salary }}</td>
+          
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.role }}</td>
+            <td>R$ {{ employee.salary }}</td>
             
               <td class="actions">
 
@@ -49,12 +49,15 @@
                 Editar
               </button>
 
+              @if (isAdmin){
+              
               <button
                 class="delete-btn"
                 (click)="deleteEmployee(employee.id)">
                 Excluir
               </button>
-            
+              
+              }
 
           </tr>
 

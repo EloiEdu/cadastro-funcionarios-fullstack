@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Token } from "@angular/compiler";
-
+import { TokenService } from "./token.service";
 export interface LoginRequest{
   email: string
   password: string
@@ -21,7 +21,8 @@ export class AuthService{
   private readonly apiUrl = 'http://localhost:3333/login'
 
   constructor(
-    private http: HttpClient)
+    private http: HttpClient,
+    private tokenService: TokenService)
     {}
 
   login(data: LoginRequest): Observable<LoginResponse>{
@@ -29,19 +30,5 @@ export class AuthService{
     return this.http.post<LoginResponse>(this.apiUrl,data) 
   }
 
-  saveToken(token: string): void{
-    localStorage.setItem('token',token)
-  }
-
-  getToken(): string | null{
-    return localStorage.getItem('token')
-  }
-
-  isAuthenticated(): boolean{
-    return !!this.getToken()
-  }
-
-  logout(): void{
-    localStorage.removeItem('token')
-  }
+  
 }

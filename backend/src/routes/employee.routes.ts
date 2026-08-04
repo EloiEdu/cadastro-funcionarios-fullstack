@@ -2,6 +2,7 @@ import { EmployeeController } from '../controllers.ts/employee.controller.js';
 import {FastifyInstance} from 'fastify'
 import { CreateEmployee } from '../interfaces/employee.interface.js';
 import { authMiddleware } from '../middleware/auth.middleware.js';
+import { authorize } from '../middleware/authorize.middleware.js';
 
 export async function employeeRoutes(app: FastifyInstance){
 
@@ -40,7 +41,11 @@ export async function employeeRoutes(app: FastifyInstance){
         return reply.send(updatedEmployee)
     })
 
-    app.delete('/employees/:id',async(request,reply)=>{
+    app.delete('/employees/:id',{
+        preHandler:[
+            authorize(['ADMIN'])
+        ]
+    },async(request,reply)=>{
         
         const {id} = request.params as {id:string}
         

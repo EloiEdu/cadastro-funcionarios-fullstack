@@ -21,3 +21,8 @@ npm-debug.log*
 # Sistema
 .DS_Store
 Thumbs.db
+
+# PostgreSQL local
+*.sql
+
+.env.production

@@ -4,7 +4,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core'
 import { NgZone } from '@angular/core';
-
+import { TokenService } from '../../core/services/token.service';
 @Component({
   selector: 'app-employees',
   standalone: true,
@@ -16,11 +16,13 @@ export class EmployeesComponent implements OnInit{
   
   instanceId = Math.random().toString(36).slice(2, 8)
   employees = signal<Employee[]>([])
+  isAdmin = false
   
   constructor(
     private employeeService: EmployeeService, 
     private cdr: ChangeDetectorRef,
-    private zone: NgZone
+    private zone: NgZone,
+    private tokenService: TokenService
     ){}
   
   loadEmployees(): void {
@@ -30,9 +32,6 @@ export class EmployeesComponent implements OnInit{
       next:(employees)=>{
         console.log('zona ativa:', NgZone.isInAngularZone())
         this.employees.set(employees)
-        //this.cdr.detectChanges()
-        //console.log('mesmo array?', this.employees)
-        //console.log('length:',this.employees.length)
 
         setTimeout(()=>{
           console.log('depois de 2 segundos:', this.employees.length)
@@ -45,6 +44,7 @@ export class EmployeesComponent implements OnInit{
 }
  
   ngOnInit(): void{
+    this.isAdmin = this.tokenService.isAdmin()
     console.log('EmployeesComponent',this.instanceId, 'iniciado')
     this.loadEmployees()
   }

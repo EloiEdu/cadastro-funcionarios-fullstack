@@ -2,6 +2,9 @@ import { FastifyReply,FastifyRequest } from "fastify";
 
 export async function authMiddleware(request:FastifyRequest,reply:FastifyReply){
 
+    if (request.method ==='OPTIONS'){
+        return
+    }
     try{
         await request.jwtVerify()
 

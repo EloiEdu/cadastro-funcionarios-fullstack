@@ -1,6 +1,7 @@
 import { AuthService } from '../../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from '../../../core/services/token.service';
 @Component({
   selector: 'app-header',
   standalone : true,
@@ -11,12 +12,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
 
     constructor(
-      private authService: AuthService,
+      private tokenService: TokenService,
       private router: Router
     ){}
 
     logout(): void{
-      this.authService.logout()
+      this.tokenService.removeToken()
       this.router.navigate(['/login'])
     }
 }
