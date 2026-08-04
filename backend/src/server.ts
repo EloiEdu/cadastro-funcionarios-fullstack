@@ -9,20 +9,20 @@ import jwt from '@fastify/jwt'
 const app = Fastify()
 
 await app.register(cors,{
-    origin: 'http://localhost:4200',
+    origin: true,
     methods: ['GET','POST','PUT','DELETE','OPTIONS'],
     allowedHeaders:['Content-Type', 'Authorization']
 })
 
 await app.register(jwt,{
-    secret:'chave-secreta'
+    secret:process.env.JWT_SECRET as string
 })
 
 await app.register(authRoutes)
 await app.register(employeeRoutes)
 
 app.listen({
-    port:3333,
+    port:Number(process.env.PORT) || 3333,
     host: '0.0.0.0'
 })
 .then(()=>{
