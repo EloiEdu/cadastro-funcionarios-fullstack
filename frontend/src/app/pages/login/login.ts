@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule} from '@angular/common';
 import { Router } from '@angular/router';
+import { TokenService } from '../../core/services/token.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -17,7 +18,7 @@ export class LoginComponent {
     loginForm : any
     isloading = false
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router){
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private tokenService: TokenService){
 
       // Campos e validações
       this.loginForm = this.fb.group({
@@ -42,7 +43,7 @@ export class LoginComponent {
           password
         }).subscribe({
           next:(response) =>{
-            this.authService.saveToken(response.token)
+            this.tokenService.saveToken(response.token)
             console.log('token salvo: ',response.token)
             this.isloading = false
             this.router.navigate(['/dashboard'])
