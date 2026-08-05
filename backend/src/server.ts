@@ -13,12 +13,22 @@ const allowedOrigins = [
   'http://localhost:4200',
 ]
 
-if (process.env.FRONTEND_URL){
-  allowedOrigins.push(process.env.FRONTEND_URL)
-}
-
 await app.register(cors, {
-  origin: allowedOrigins, 
+  origin: (origin, cb) => {
+    if (!origin) {
+      cb(null, true)
+      return
+    }
+
+    const cleanOrigin = origin.replace(/\/$/, '')
+
+    if (allowedOrigins.includes(cleanOrigin) || cleanOrigin.endsWith('.vercel.app')) {
+      cb(null, true)
+      return
+    }
+
+    cb(new Error("Bloqueado pelo CORS"), false)
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
