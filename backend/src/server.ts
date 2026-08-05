@@ -15,11 +15,12 @@ const allowedOrigins = [
 ].filter(Boolean) as string[]
 
 await app.register(cors, {
-  origin: allowedOrigins, 
+  origin: true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  strictPreflight: false
 })
 
 await app.register(jwt,{
