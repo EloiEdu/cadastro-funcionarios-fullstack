@@ -10,16 +10,18 @@ const app = Fastify()
 
 const allowedOrigins = [
   'https://cadastro-funcionarios-fullstack.vercel.app/',
-  'http://localhost:3000',
-  process.env.FRONTEND_URL
-].filter(Boolean) as string[]
+  'http://localhost:4200',
+]
+
+if (process.env.FRONTEND_URL){
+  allowedOrigins.push(process.env.FRONTEND_URL)
+}
 
 await app.register(cors, {
-  origin: true, 
+  origin: allowedOrigins, 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  optionsSuccessStatus: 204,
   strictPreflight: false
 })
 
