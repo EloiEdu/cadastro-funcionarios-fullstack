@@ -8,31 +8,20 @@ import jwt from '@fastify/jwt'
 
 const app = Fastify()
 
+const frontendUrl = process.env.FRONTEND_URL?.replace(/\/$/, '')
+
 const allowedOrigins = [
-  'https://cadastro-funcionarios-fullstack.vercel.app/',
+  'https://cadastro-funcionarios-fullstack.vercel.app',
   'http://localhost:4200',
-]
+  frontendUrl
+].filter(Boolean) as string[]
 
 await app.register(cors, {
-  origin: (origin, cb) => {
-    if (!origin) {
-      cb(null, true)
-      return
-    }
-
-    const cleanOrigin = origin.replace(/\/$/, '')
-
-    if (allowedOrigins.includes(cleanOrigin) || cleanOrigin.endsWith('.vercel.app')) {
-      cb(null, true)
-      return
-    }
-
-    cb(new Error("Bloqueado pelo CORS"), false)
-  },
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  strictPreflight: false
+  strictPreflight: false // Previne que o Fastify rejeite chamadas de Preflight do browser
 })
 
 await app.register(jwt,{
