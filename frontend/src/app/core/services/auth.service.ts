@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Token } from "@angular/compiler";
 import { TokenService } from "./token.service";
+import { environment } from "../../../environments/environment";
 export interface LoginRequest{
   email: string
   password: string
@@ -18,7 +19,7 @@ export interface LoginResponse{
 
 export class AuthService{
 
-  private readonly apiUrl = 'http://localhost:3333/login'
+  private readonly apiUrl = `${environment.apiUrl}/login`
 
   constructor(
     private http: HttpClient,

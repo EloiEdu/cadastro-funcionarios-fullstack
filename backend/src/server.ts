@@ -8,10 +8,24 @@ import jwt from '@fastify/jwt'
 
 const app = Fastify()
 
-await app.register(cors,{
-    origin: true,
-    methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-    allowedHeaders:['Content-Type', 'Authorization']
+await app.register(cors, {
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      'http://localhost:4200'
+    ]
+
+    if (!origin) {
+      return callback(null, true)
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+    callback(new Error('Origem não permitida'), false)
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 })
 
 await app.register(jwt,{
