@@ -15,14 +15,13 @@ await app.register(cors, {
       'http://localhost:4200'
     ]
 
-    if (!origin) {
+    if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true)
     }
 
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true)
-    }
-    callback(new Error('Origem não permitida'), false)
+    return callback(null, false)
+  
+    
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
