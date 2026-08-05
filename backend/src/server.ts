@@ -9,16 +9,17 @@ import jwt from '@fastify/jwt'
 const app = Fastify()
 
 const allowedOrigins = [
-  'http://localhost:4200',
+  'https://cadastro-funcionarios-fullstack.vercel.app/',
   'http://localhost:3000',
   process.env.FRONTEND_URL
 ].filter(Boolean) as string[]
 
 await app.register(cors, {
-  origin: allowedOrigins.length > 0 ? allowedOrigins : '*', 
+  origin: allowedOrigins, 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 204
 })
 
 await app.register(jwt,{
